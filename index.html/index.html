@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shard VPN — Быстрый и стабильный VPN для обхода блокировок</title>
+    <meta name="description" content="Shard VPN — надёжный VPN прямо в Telegram. Обход блокировок РКН, белые списки, высокая скорость. Подключись за 10 секунд.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --bg: #0b0f19;
+            --card: #131926;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --accent: #22c55e;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.03em;
+        }
+
+        h1 .highlight {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 36px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px -10px rgba(59, 130, 246, 0.7);
+        }
+
+        .btn-secondary {
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: #1a2234;
+            border-color: #334155;
+        }
+
+        .trust {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        /* Features */
+        .features {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        /* How it works */
+        .how {
+            padding: 60px 0;
+            background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.05));
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            counter-reset: step;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin: 0 auto 18px;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* Big CTA */
+        .big-cta {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #1e3a8a, #312e81);
+            border-radius: 24px;
+            padding: 50px 30px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-box h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-box p {
+            color: #c7d2fe;
+            margin-bottom: 30px;
+            font-size: 1.15rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 50px 0 40px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 340px;
+            }
+            
+            .cta-box {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                ⚡ <span>Shard VPN</span>
+            </div>
+            <a href="https://t.me/shardvpn?start=8662774434" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.95rem;">
+                Подключить
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="badge">
+                <span>●</span> Работает даже при белых списках
+            </div>
+            
+            <h1>
+                Быстрый VPN<br>
+                <span class="highlight">прямо в Telegram</span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                Обходи блокировки РКН, замедления и ограничения мобильного интернета. 
+                Подключение за 10 секунд — без приложений и сложных настроек.
+            </p>
+
+            <div class="cta-buttons">
+                <a href="https://t.me/shardvpn?start=8662774434" class="btn btn-primary">
+                    🚀 Подключить VPN бесплатно
+                </a>
+                <a href="https://t.me/shardvpn?start=8662774434" class="btn btn-secondary">
+                    Открыть в Telegram
+                </a>
+            </div>
+            
+            <p class="trust">
+                ✅ Без регистрации &nbsp;•&nbsp; ✅ Высокая скорость &nbsp;•&nbsp; ✅ Работает с белыми списками
+            </p>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают Shard VPN</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Обход блокировок РКН</h3>
+                    <p>Стабильно работает даже при жёстких ограничениях и замедлениях. Белые списки — не проблема.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Высокая скорость</h3>
+                    <p>Оптимизированные серверы. Можно смотреть видео в высоком качестве и играть без лагов.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Прямо в Telegram</h3>
+                    <p>Не нужно скачивать отдельные приложения. Всё подключается через удобного бота за несколько секунд.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Серверы по миру</h3>
+                    <p>Доступ к серверам в разных странах. Выбирай локацию под свои задачи.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📶</div>
+                    <h3>Мобильный интернет</h3>
+                    <p>Специально заточен под работу при ограничениях мобильного интернета и whitelist-режиме.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Просто и надёжно</h3>
+                    <p>Минимум настроек. Нажал кнопку — и ты уже в сети. Поддержка всегда на связи.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how">
+        <div class="container">
+            <h2 class="section-title">Как подключиться за 10 секунд</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Нажми кнопку</h3>
+                    <p>Перейди по ссылке и открой бота Shard VPN в Telegram</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Нажми «Старт»</h3>
+                    <p>Бот сразу предложит подключить VPN одним нажатием</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Готово!</h3>
+                    <p>Подключение установлено. Пользуйся свободным интернетом</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Big CTA -->
+    <section class="big-cta">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Готов подключить Shard VPN?</h2>
+                <p>Тысячи людей уже пользуются. Присоединяйся — это быстро и удобно.</p>
+                
+                <a href="https://t.me/shardvpn?start=8662774434" class="btn btn-primary" style="font-size: 1.25rem; padding: 20px 42px;">
+                    🚀 Перейти в бота и подключить
+                </a>
+                
+                <p style="margin-top: 20px; font-size: 0.95rem; color: #a5b4fc;">
+                    Ссылка работает напрямую • Без лишних действий
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Shard VPN — быстрый доступ к свободному интернету</p>
+            <p style="margin-top: 8px;">
+                <a href="https://t.me/shardvpn?start=8662774434" style="color: #60a5fa; text-decoration: none;">t.me/shardvpn</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
